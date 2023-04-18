@@ -9,18 +9,22 @@ import software.constructs.Construct;
 
 public class VpcStack extends Stack {
 
+    private Vpc vpc;
+
     public VpcStack(@Nullable Construct scope, @Nullable String id) {
-        super(scope, id);
+        this(scope, id, null);
     }
 
     public VpcStack(@Nullable Construct scope, @Nullable String id, @Nullable StackProps props) {
         super(scope, id, props);
 
-        Vpc.Builder.create(this, "Vpc01")
+        vpc = Vpc.Builder.create(this, "Vpc01")
                 .maxAzs(2)
                 .natGateways(0)
                 .build();
     }
 
-
+    public Vpc getVpc() {
+        return vpc;
+    }
 }
