@@ -9,6 +9,8 @@ import software.constructs.Construct;
 
 public class ClusterStack extends Stack {
 
+    private Cluster cluster;
+
     public ClusterStack(@Nullable Construct scope, @Nullable String id, Vpc vpc) {
         this(scope, id, null,vpc);
     }
@@ -16,9 +18,13 @@ public class ClusterStack extends Stack {
     public ClusterStack(@Nullable Construct scope, @Nullable String id, @Nullable StackProps props, Vpc vpc) {
         super(scope, id, props);
 
-        Cluster.Builder.create(this, id)
+        cluster = Cluster.Builder.create(this, id)
                 .clusterName("cluster-01")
                 .vpc(vpc)
                 .build();
+    }
+
+    public Cluster getCluster() {
+        return cluster;
     }
 }
